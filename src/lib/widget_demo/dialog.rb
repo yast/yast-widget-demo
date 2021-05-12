@@ -17,6 +17,7 @@
 #  you may find current contact information at www.suse.com
 
 require "yast"
+require "widget_demo/pages/simple_widgets"
 
 Yast.import "UI"
 Yast.import "Wizard"
@@ -30,12 +31,13 @@ module Yast
 
       def initialize
         @next_step_id = "step_00"
+        @page = Pages::SimpleWidgets.new
       end
 
       # Displays the dialog
       def run
         create_dialog
-        show_page(page1)
+        show_page(@page.content)
         set_wizard_steps
 
         begin
@@ -107,12 +109,19 @@ module Yast
 
       def event_loop
         loop do
-          case input = UI.UserInput
-          when :ok, :next, :abort, :cancel # :cancel is WM_CLOSE
+          event = UI.WaitForEvent
+          # event_id = @navigator.current_page.handle_event(event) || event["ID"]
+          event_id = event["ID"]
+          log.info("Handling #{event_id}")
+          case event_id
+          when :next
+            @navigator.next_page
+          when :back
+            @navigator.prev_page
+          when :close, :abort, :cancel # :cancel is WM_CLOSE
             # Break the loop
+            log.info("Closing")
             break
-          else
-            log.warn "Unexpected input #{input}"
           end
         end
       end
