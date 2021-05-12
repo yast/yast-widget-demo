@@ -17,6 +17,7 @@
 #  you may find current contact information at www.suse.com
 
 require "yast"
+require "widget_demo/page_navigator"
 require "widget_demo/pages/simple_widgets"
 
 Yast.import "UI"
@@ -30,14 +31,16 @@ module Yast
       include Yast::Logger
 
       def initialize
-        @next_step_id = "step_00"
-        @page = Pages::SimpleWidgets.new
+        @page_navigator = PageNavigator.new
       end
 
       # Displays the dialog
       def run
         create_dialog
-        show_page(@page.content)
+        nav.add_page(Pages::SimpleWidgets.new)
+        nav.add_page(Pages::SimpleWidgets.new)
+        nav.add_page(Pages::SimpleWidgets.new)
+        show_current_page
         set_wizard_steps
 
         begin
@@ -57,16 +60,17 @@ module Yast
         UI.CloseDialog
       end
 
-      def show_page(page_contents)
-        title = "Wizard Dialog"
-        has_back = false
-        has_next = true
-        Wizard.SetContents(title, page_contents, help_text, has_back, has_next)
+      def nav
+        @page_navigator
       end
 
-      def page1
-        # Intentionally no translations in this module
-        Label("Hello, world!")
+      def current_page
+        nav.current_page
+      end
+
+      def show_current_page
+        page = current_page
+        Wizard.SetContents(page.name, page.content, help_text, nav.back?, nav.next?)
       end
 
       def help_text
@@ -77,10 +81,12 @@ module Yast
       def set_wizard_steps
         delete_wizard_steps
         add_wizard_step_heading("Widget Demo")
-        add_wizard_step("Simple Widgets")
-        add_wizard_step("Selection Widgets")
-        add_wizard_step("Table")
-        add_wizard_step("Tree")
+
+        nav.pages.each { |page| add_wizard_step(page.name, page.id) }
+        # add_wizard_step("Simple Widgets")
+        # add_wizard_step("Selection Widgets")
+        # add_wizard_step("Table")
+        # add_wizard_step("Tree")
         add_wizard_step_heading("Package Management")
         add_wizard_step("PatternSelector")
         add_wizard_step("PackageSelector")
@@ -110,14 +116,15 @@ module Yast
       def event_loop
         loop do
           event = UI.WaitForEvent
-          # event_id = @navigator.current_page.handle_event(event) || event["ID"]
-          event_id = event["ID"]
+          event_id = current_page.handle_event(event) || event["ID"]
           log.info("Handling #{event_id}")
           case event_id
           when :next
-            @navigator.next_page
+            nav.next_page
+            show_current_page
           when :back
-            @navigator.prev_page
+            nav.prev_page
+            show_current_page
           when :close, :abort, :cancel # :cancel is WM_CLOSE
             # Break the loop
             log.info("Closing")
