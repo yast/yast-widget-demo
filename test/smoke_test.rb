@@ -21,7 +21,6 @@
 require_relative "spec_helper"
 require "widget_demo/dialog"
 
-
 describe Yast::WidgetDemo::Dialog do
   subject(:client) { described_class.new }
 

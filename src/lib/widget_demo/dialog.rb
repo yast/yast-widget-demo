@@ -24,46 +24,46 @@ module Yast
   module WidgetDemo
     # Dialog to showcase UI widgets
     class Dialog
-  
       include Yast::UIShortcuts
       include Yast::Logger
-  
+
       def initialize
         # to do
       end
-  
+
       # Displays the dialog
       def run
         return unless create_dialog
-  
+
         begin
           return event_loop
         ensure
           close_dialog
         end
       end
-  
-    private
-  
+
+      private
+
       def create_dialog
         # Intentionally no translation in this module
         UI.OpenDialog(
-          MinSize( 50, 10,
+          MinSize(
+            50, 10,
             HVCenter(
               VBox(
                 Label("Hello, world!"),
-                VSpacing( 1 ),
+                VSpacing(1),
                 PushButton(Id(:ok), Opt(:default), "&OK")
               )
             )
           )
         )
       end
-  
+
       def close_dialog
         UI.CloseDialog
       end
-  
+
       def event_loop
         loop do
           case input = UI.UserInput
