@@ -89,9 +89,9 @@ module Yast
         add_wizard_step_heading("Widget Demo")
         nav.pages.each { |page| add_wizard_step(page.name, page.id) }
         # FIXME: TO DO
-        add_wizard_step_heading("Package Management")
-        add_wizard_step("PatternSelector")
-        add_wizard_step("PackageSelector")
+        ### add_wizard_step_heading("Package Management")
+        ### add_wifzard_step("PatternSelector", "pattern-sel")
+        ### add_wizard_step("PackageSelector", "pkg-sel")
       end
 
       def delete_wizard_steps
@@ -117,7 +117,7 @@ module Yast
         loop do
           event = UI.WaitForEvent
           event_id = current_page.handle_event(event) || event["ID"]
-          log.info("Handling #{event_id}")
+          # log.info("Handling #{event_id}")
           case event_id
           when :next
             nav.next_page
