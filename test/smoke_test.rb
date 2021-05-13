@@ -26,7 +26,7 @@ describe Yast::WidgetDemo::Dialog do
 
   describe "#run" do
     it "does not crash" do
-      allow(Yast::UI).to receive(:UserInput).and_return(:cancel)
+      allow(Yast::UI).to receive(:WaitForEvent).and_return("ID" => :cancel)
       client.run
     end
   end

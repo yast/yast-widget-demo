@@ -24,7 +24,7 @@ require "widget_demo/pages/simple_widgets"
 
 describe Yast::WidgetDemo::PageNavigator do
   context "empty" do
-    subject(:nav) { described_class.new }
+    subject { described_class.new }
     describe "#pages" do
       it "is empty" do
         expect(subject.pages).to be_empty
@@ -57,7 +57,7 @@ describe Yast::WidgetDemo::PageNavigator do
   end
 
   context "with 3 pages" do
-    subject(:nav) do
+    subject do
       nav = described_class.new
       nav.add_page(Yast::WidgetDemo::Pages::SimpleWidgets.new)
       nav.add_page(Yast::WidgetDemo::Pages::SimpleWidgets.new)

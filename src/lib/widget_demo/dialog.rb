@@ -50,6 +50,18 @@ module Yast
         end
       end
 
+      def nav
+        @page_navigator
+      end
+
+      def current_page
+        nav.current_page
+      end
+
+      def pages
+        nav.pages
+      end
+
       private
 
       def create_dialog
@@ -60,17 +72,10 @@ module Yast
         UI.CloseDialog
       end
 
-      def nav
-        @page_navigator
-      end
-
-      def current_page
-        nav.current_page
-      end
-
       def show_current_page
         page = current_page
         Wizard.SetContents(page.name, page.content, help_text, nav.back?, nav.next?)
+        page.widgets_created
       end
 
       def help_text

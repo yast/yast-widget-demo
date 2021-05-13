@@ -32,11 +32,11 @@ module Yast
         # @!method name
         #   @return [String] a name for this page
         abstract_method :name
-        
-        # @!method content 
+
+        # @!method content
         #   @return [<YaST::Term] the widget content of this page
         abstract_method :content
-        
+
         # @return [String] the wizard step ID for this page
         def id
           name
@@ -51,7 +51,14 @@ module Yast
         #
         # @param event [<UI::Event]
         # @return [symbol, nil]
-        def handle_event(event)
+        def handle_event(_event)
+          nil
+        end
+
+        # Additional initializations to be done after the page's widgets are
+        # created, but before the event handler. This can be used to populate
+        # lists and tables with content.
+        def widgets_created
           nil
         end
       end
