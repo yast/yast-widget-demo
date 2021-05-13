@@ -29,7 +29,7 @@ describe Yast::WidgetDemo::Pages do
     it "has a non-empty name" do
       expect(subject.name).to match(/[A-Za-z0-9_]+/)
     end
-    
+
     it "has a non-empty page ID" do
       expect(subject.id).to match(/[A-Za-z0-9_]+/)
     end
@@ -38,7 +38,7 @@ describe Yast::WidgetDemo::Pages do
       expect(page.content).not_to be_nil
     end
   end
-  
+
   describe Yast::WidgetDemo::Pages::SimpleWidgets do
     include_examples "page smoke test"
   end
