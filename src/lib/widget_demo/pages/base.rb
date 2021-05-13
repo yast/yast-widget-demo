@@ -34,7 +34,7 @@ module Yast
         abstract_method :name
 
         # @!method content
-        #   @return [<YaST::Term] the widget content of this page
+        #   @return [<YaST::Term>] the widget content of this page
         abstract_method :content
 
         # @return [String] the wizard step ID for this page
@@ -49,7 +49,7 @@ module Yast
         #
         # Do not handle the wizard buttons (:next, :back, :abort) here.
         #
-        # @param event [<UI::Event]
+        # @param event [<UI::Event>]
         # @return [symbol, nil]
         def handle_event(_event)
           nil
@@ -60,6 +60,19 @@ module Yast
         # lists and tables with content.
         def widgets_created
           nil
+        end
+
+        protected
+
+        # Generate an array of string items:
+        # ["Item 1", "Item 2", "Item 3"]
+        #
+        # @param count [Integer] number of items
+        # @return [Array<String>]
+        def items(count)
+          result = []
+          count.times { |i| result << "Item #{i + 1}" }
+          result
         end
       end
     end

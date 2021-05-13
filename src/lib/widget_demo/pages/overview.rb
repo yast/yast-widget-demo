@@ -35,9 +35,23 @@ module Yast
             MinSize(
               50, 28,
               VBox(
-                labels,
-                VSpacing(1),
-                input_fields,
+                HBox(
+                  VBox(
+                    labels,
+                    VSpacing(1),
+                    input_widgets,
+                    VStretch()
+                  ),
+                  HSpacing(3),
+                  VBox(
+                    radio_box,
+                    VSpacing(1),
+                    check_boxes,
+                    VSpacing(1),
+                    selection_box,
+                    VStretch()
+                  )
+                ),
                 VSpacing(0.4), # maintain some minimum spacing
                 Bottom(buttons)
               )
@@ -54,10 +68,59 @@ module Yast
           )
         end
 
-        def input_fields
-          VBox(
-            Left(InputField("InputField"))
+        def input_widgets
+          CheckBoxFrame(
+            "CheckBox&Frame", true,
+            MarginBox(
+              0.5, 0.2,
+              VBox(
+                Left(ComboBox("C&omboBox", items(5))),
+                Left(InputField(Opt(:hstretch), "&InputField")),
+                Left(
+                  ComboBox(
+                    Opt(:editable, :hstretch),
+                    "ComboBox (&editable)",
+                    items(5)
+                  )
+                ),
+                Left(MultiLineEdit("M&ultiLineEdit", lorem_ipsum))
+              )
+            )
           )
+        end
+
+        def lorem_ipsum
+          txt = "Lorem ipsum dolor sit amet,\n"
+          txt << "consectetur adipiscing elit,\n"
+          txt << "sed do eiusmod tempor incididunt."
+          txt
+        end
+
+        def check_boxes
+          VBox(
+            Left(CheckBox("Checkbo&x 1", false)),
+            Left(CheckBox("Chec&kbox 2", true))
+          )
+        end
+
+        def radio_box
+          Frame(
+            "Frame",
+            MarginBox(
+              1, 0.2,
+              RadioButtonGroup(
+                VBox(
+                  Left(RadioButton("RadioButton &1", true)),
+                  Left(RadioButton("RadioButton &2")),
+                  Left(RadioButton("RadioButton &3"))
+                )
+              )
+            )
+          )
+        end
+
+        def selection_box
+          SelectionBox("&SelectionBox", items(12))
         end
 
         def buttons
