@@ -18,6 +18,7 @@
 
 require "yast"
 require "widget_demo/page_navigator"
+require "widget_demo/pages/overview"
 require "widget_demo/pages/simple_widgets"
 
 Yast.import "UI"
@@ -37,11 +38,10 @@ module Yast
       # Displays the dialog
       def run
         create_dialog
+        nav.add_page(Pages::Overview.new)
         nav.add_page(Pages::SimpleWidgets.new)
-        nav.add_page(Pages::SimpleWidgets.new)
-        nav.add_page(Pages::SimpleWidgets.new)
-        show_current_page
         set_wizard_steps
+        show_current_page
 
         begin
           return event_loop
@@ -76,6 +76,7 @@ module Yast
         page = current_page
         Wizard.SetContents(page.name, page.content, help_text, nav.back?, nav.next?)
         page.widgets_created
+        mark_wizard_step(page.id)
       end
 
       def help_text
@@ -86,21 +87,15 @@ module Yast
       def set_wizard_steps
         delete_wizard_steps
         add_wizard_step_heading("Widget Demo")
-
         nav.pages.each { |page| add_wizard_step(page.name, page.id) }
-        # add_wizard_step("Simple Widgets")
-        # add_wizard_step("Selection Widgets")
-        # add_wizard_step("Table")
-        # add_wizard_step("Tree")
+        # FIXME: TO DO
         add_wizard_step_heading("Package Management")
         add_wizard_step("PatternSelector")
         add_wizard_step("PackageSelector")
-        mark_wizard_step("step_01")
       end
 
       def delete_wizard_steps
         UI.WizardCommand(Yast.term(:DeleteSteps))
-        @next_step_id = "step_00"
       end
 
       def add_wizard_step_heading(text)
@@ -110,11 +105,11 @@ module Yast
 
       def add_wizard_step(text, step_id = nil)
         # Steps without an ID are ignored
-        step_id ||= @next_step_id.next!
         UI.WizardCommand(Yast.term(:AddStep, text, step_id))
       end
 
       def mark_wizard_step(step_id)
+        UI.WizardCommand(Yast.term(:UpdateSteps))
         UI.WizardCommand(Yast.term(:SetCurrentStep, step_id))
       end
 

@@ -19,7 +19,8 @@
 #  you may find current contact information at www.suse.com
 
 require_relative "spec_helper"
-require "widget_demo/pages/simple_widgets.rb"
+require "widget_demo/pages/overview"
+require "widget_demo/pages/simple_widgets"
 
 describe Yast::WidgetDemo::Pages do
 
@@ -37,6 +38,10 @@ describe Yast::WidgetDemo::Pages do
     it "has non-nil content and does not crash" do
       expect(page.content).not_to be_nil
     end
+  end
+
+  describe Yast::WidgetDemo::Pages::Overview do
+    include_examples "page smoke test"
   end
 
   describe Yast::WidgetDemo::Pages::SimpleWidgets do
