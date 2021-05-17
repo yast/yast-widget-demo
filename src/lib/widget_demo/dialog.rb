@@ -23,6 +23,7 @@ require "widget_demo/pages/simple_widgets"
 
 Yast.import "UI"
 Yast.import "Wizard"
+Yast.import "Label"
 
 module Yast
   module WidgetDemo
@@ -74,9 +75,12 @@ module Yast
 
       def show_current_page
         page = current_page
-        Wizard.SetContents(page.name, page.content, help_text, nav.back?, nav.next?)
+        # Always enable the "Next" button: If there is no more next page,
+        # it will have the label "Finish", but we still need it to work
+        Wizard.SetContents(page.name, page.content, help_text, nav.back?, true)
         page.widgets_created
         mark_wizard_step(page.id)
+        update_wizard_buttons
       end
 
       def help_text
@@ -113,6 +117,14 @@ module Yast
         UI.WizardCommand(Yast.term(:SetCurrentStep, step_id))
       end
 
+      def update_wizard_buttons
+        if nav.next?
+          Wizard.SetNextButton(:next, Label.NextButton)
+        else
+          Wizard.SetNextButton(:finish, Label.FinishButton)
+        end
+      end
+
       def event_loop
         loop do
           event = UI.WaitForEvent
@@ -125,7 +137,7 @@ module Yast
           when :back
             nav.prev_page
             show_current_page
-          when :close, :abort, :cancel # :cancel is WM_CLOSE
+          when :finish, :abort, :cancel # :cancel is WM_CLOSE
             # Break the loop
             log.info("Closing")
             break
