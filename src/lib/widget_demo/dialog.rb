@@ -51,10 +51,6 @@ module Yast
         end
       end
 
-      def nav
-        @page_navigator
-      end
-
       def current_page
         nav.current_page
       end
@@ -64,6 +60,10 @@ module Yast
       end
 
       private
+
+      def nav
+        @page_navigator
+      end
 
       def create_dialog
         Wizard.OpenNextBackStepsDialog
