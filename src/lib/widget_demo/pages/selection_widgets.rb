@@ -31,15 +31,21 @@ module Yast
         end
 
         def content
-          HVSquash(
-            MinSize(
-              100, 25,
-              HBox(
-                HWeight(1, selbox),
-                HSpacing(1),
-                HWeight(1, multi_selbox),
-                HSpacing(1),
-                HWeight(1, tree)
+          VBox(
+            VSpacing(0.4),
+            MenuBar(main_menus),
+            HVCenter(
+              HVSquash(
+                MinSize(
+                  100, 25,
+                  HBox(
+                    HWeight(1, selbox),
+                    HSpacing(1),
+                    HWeight(1, multi_selbox),
+                    HSpacing(1),
+                    HWeight(1, tree)
+                  )
+                )
               )
             )
           )
@@ -85,6 +91,15 @@ module Yast
             item << [3, 4, 5, 11, 12, 14, 17].include?(i)
             item
           end
+        end
+
+        def main_menus
+          [
+            Menu("Menu&Bar", items(5, "MenuItem 10")),
+            Menu("Menu &2", items(7, "MenuItem 20")),
+            Menu("Menu &3", items(4, "MenuItem 30")),
+            Menu("Menu &4", items(7, "MenuItem 40"))
+          ]
         end
       end
     end
