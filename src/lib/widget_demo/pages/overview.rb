@@ -136,14 +136,7 @@ module Yast
             [
               Item(Id(:menu_item1), "MenuItem &1"),
               Item(Id(:menu_item2), "MenuItem &2"),
-              Menu(
-                "&Submenu",
-                [
-                  Item(Id(:menu_item_31), "MenuItem 3&1"),
-                  Item(Id(:menu_item_32), "MenuItem 3&2"),
-                  Item(Id(:menu_item_33), "MenuItem 3&3")
-                ]
-              ),
+              Menu("&Submenu", items(3, "MenuItem 3&0")),
               Item(Id(:menu_item4), "MenuItem &4")
             ]
           )

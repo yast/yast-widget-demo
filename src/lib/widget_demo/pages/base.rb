@@ -64,14 +64,31 @@ module Yast
 
         protected
 
-        # Generate an array of string items:
-        # ["Item 1", "Item 2", "Item 3"]
+        # Generate an array of UI item-terms based on the specified
+        # template string:
+        #
+        #   [
+        #     Item("Item 1"),
+        #     Item("Item 2"),
+        #     Item("Item 3")
+        #   ]
+        #
+        # An optional code block can be used to modify each item, e.g. to add a
+        # boolean for a selected state.
         #
         # @param count [Integer] number of items
-        # @return [Array<String>]
-        def items(count)
+        # @param template [String] template for the item
+        #
+        # @return [Array<Term<String>>]
+        #
+        def items(count, item_template = nil)
+          item_template ||= (count < 10) ? "Item 0" : "Item 00"
           result = []
-          count.times { |i| result << "Item #{i + 1}" }
+          count.times do |i|
+            item_term = Item(item_template.next!.dup)
+            item_term = yield(item_term, i) if block_given?
+            result << item_term unless item_term.nil?
+          end
           result
         end
       end
