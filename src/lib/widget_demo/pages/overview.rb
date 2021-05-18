@@ -37,21 +37,20 @@ module Yast
               VBox(
                 HBox(
                   VBox(
-                    labels,
-                    VSpacing(1),
                     input_widgets,
                     VStretch()
                   ),
                   HSpacing(3),
                   VBox(
+                    labels,
+                    VSpacing(1),
                     radio_box,
                     VSpacing(1),
                     check_boxes,
-                    VSpacing(1),
-                    selection_box,
                     VStretch()
                   )
                 ),
+                rich_text,
                 VSpacing(0.4), # maintain some minimum spacing
                 Bottom(buttons)
               )
@@ -65,6 +64,29 @@ module Yast
           VBox(
             Left(Label("Label")),
             Left(Label(Opt(:outputField), "OutputField"))
+          )
+        end
+
+        def check_boxes
+          VBox(
+            Left(CheckBox("Checkbo&x 1", false)),
+            Left(CheckBox("Chec&kbox 2", true))
+          )
+        end
+
+        def radio_box
+          Frame(
+            "Frame",
+            MarginBox(
+              1, 0.2,
+              RadioButtonGroup(
+                VBox(
+                  Left(RadioButton("RadioButton &1", true)),
+                  Left(RadioButton("RadioButton &2")),
+                  Left(RadioButton("RadioButton &3"))
+                )
+              )
+            )
           )
         end
 
@@ -96,31 +118,22 @@ module Yast
           txt
         end
 
-        def check_boxes
-          VBox(
-            Left(CheckBox("Checkbo&x 1", false)),
-            Left(CheckBox("Chec&kbox 2", true))
-          )
+        def rich_text
+          text = "<h2>RichText</h2>"
+          text << lorem_html("dolor")
+          text << lorem_html("amet")
+          RichText(text)
         end
 
-        def radio_box
-          Frame(
-            "Frame",
-            MarginBox(
-              1, 0.2,
-              RadioButtonGroup(
-                VBox(
-                  Left(RadioButton("RadioButton &1", true)),
-                  Left(RadioButton("RadioButton &2")),
-                  Left(RadioButton("RadioButton &3"))
-                )
-              )
-            )
-          )
-        end
-
-        def selection_box
-          SelectionBox("&SelectionBox", items(12))
+        # Return a piece of "lorem ipsum" text formatted as HTML with a regexp
+        # 'anchor' turned into a hyperlink
+        #
+        # @param anchor [String]
+        # @return [String]
+        def lorem_html(anchor)
+          html = "<p>#{lorem_ipsum}</p>"
+          html.gsub!(anchor, "<a href=\"#{anchor}\">#{anchor}</a>")
+          html
         end
 
         def buttons

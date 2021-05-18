@@ -33,11 +33,13 @@ module Yast
         def content
           HVSquash(
             MinSize(
-              60, 22,
+              100, 25,
               HBox(
-                tree,
-                HSpacing(2),
-                multi_selbox
+                HWeight(1, selbox),
+                HSpacing(1),
+                HWeight(1, multi_selbox),
+                HSpacing(1),
+                HWeight(1, tree)
               )
             )
           )
@@ -67,6 +69,10 @@ module Yast
             Item("Item 3", items(4, "Item 30")),
             Item("Item 4", items(7, "Item 40"))
           ]
+        end
+
+        def selbox
+          SelectionBox("&SelectionBox", items(30))
         end
 
         def multi_selbox
