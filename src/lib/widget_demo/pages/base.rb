@@ -34,6 +34,8 @@ module Yast
         abstract_method :name
 
         # @!method content
+        #   The widgets content of this wizard page.
+        #   Make sure this still fits into an NCurses 80x24 screen!
         #   @return [<YaST::Term>] the widget content of this page
         abstract_method :content
 

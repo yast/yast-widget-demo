@@ -80,7 +80,7 @@ module Yast
       def show_current_page
         page = current_page
         # Always enable the "Next" button: If there is no more next page,
-        # it will have the label "Finish", but we still need it to work
+        # it will have the label "Finish", but we still need it to work.
         Wizard.SetContents(page.name, page.content, help_text, nav.back?, true)
         page.widgets_created
         mark_wizard_step(page.id)

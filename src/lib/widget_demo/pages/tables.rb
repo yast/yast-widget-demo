@@ -26,11 +26,82 @@ module Yast
     module Pages
       # Page with selection widgets (tree, multi selection box)
       class Tables < Base
+        def initialize
+          @current_tab_id = nil
+        end
+
         def name
           "Tables"
         end
 
         def content
+          UI.HasSpecialWidget(:DumbTab) ? tab_layout : simple_layout
+        end
+
+        def widgets_created
+          show_tab(:tab_standard_table) if UI.HasSpecialWidget(:DumbTab)
+        end
+
+        def handle_event(event)
+          return nil if event.nil?
+
+          event_id = event["ID"]
+          case event_id
+          when :tab_standard_table, :tab_nested_table, :nothing
+            show_tab(event_id)
+            return :event_handled # Random symbol that the caller doesn't handle
+          end
+          nil # Let the caller handle this event
+        end
+
+        private
+
+        def tab_layout
+          MarginBox(
+            1, 0.7,
+            VBox(
+              VSpacing(1),
+              DumbTab(
+                [
+                  Item(Id(:tab_standard_table), "&Standard Table"),
+                  Item(Id(:tab_nested_table), "&Nested Table"),
+                  Item(Id(:nothing), "Nothing")
+                ],
+                ReplacePoint(Id(:tab_content), Empty())
+              )
+            )
+          )
+        end
+
+        def show_tab(tab_id)
+          return if tab_id == @current_tab_id
+
+          log.info("Switching to #{tab_id}")
+          widgets = tab_content(tab_id)
+          UI.ReplaceWidget(Id(:tab_content), widgets)
+          @current_tab = tab_id
+        end
+
+        def tab_content(tab_id)
+          case tab_id
+          when :tab_standard_table
+            VBox(
+              Left(Heading("Table (standard)")),
+              standard_table
+            )
+          when :tab_nested_table
+            VBox(
+              Left(Heading("Table (nested items, multi-selection)")),
+              nested_items_table
+            )
+          else
+            HVCenter(Empty())
+          end
+        end
+
+        # This is the layout that is used if the UI does not support the DumbTab widget.
+        # Make sure this still fits into an NCurses 80x24 screen.
+        def simple_layout
           MarginBox(
             2, 0.4,
             VBox(
@@ -42,8 +113,6 @@ module Yast
             )
           )
         end
-
-        private
 
         def standard_table
           Table(

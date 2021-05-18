@@ -30,6 +30,8 @@ module Yast
           "Overview"
         end
 
+        # The content of this wizard page.
+        # Make sure this still fits into an NCurses 80x24 screen!
         def content
           HVSquash(
             MinSize(
