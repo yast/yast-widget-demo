@@ -95,7 +95,7 @@ module Yast
 
         def main_menus
           [
-            Menu("Menu&Bar", items(5, "MenuItem 10")),
+            Menu("Men&uBar", items(5, "MenuItem 10")),
             Menu("Menu &2", items(7, "MenuItem 20")),
             Menu("Menu &3", items(4, "MenuItem 30")),
             Menu("Menu &4", items(7, "MenuItem 40"))
