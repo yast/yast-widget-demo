@@ -44,6 +44,11 @@ module Yast
           name
         end
 
+        # @return [String] the wizard heading for this page.
+        def wizard_heading
+          name
+        end
+
         # Event handler for this page. This gives the page a chance to react to
         # events from widgets from this page. Return a symbol for the caller to
         # process (:close) as an event ID or 'nil' to let the caller handle
