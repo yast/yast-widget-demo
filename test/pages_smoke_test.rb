@@ -22,6 +22,7 @@ require_relative "spec_helper"
 require "widget_demo/pages/overview"
 require "widget_demo/pages/selection_widgets"
 require "widget_demo/pages/tables"
+require "widget_demo/pages/item_selector"
 require "widget_demo/pages/simple_widgets"
 
 describe Yast::WidgetDemo::Pages do
@@ -51,6 +52,10 @@ describe Yast::WidgetDemo::Pages do
   end
 
   describe Yast::WidgetDemo::Pages::Tables do
+    include_examples "page smoke test"
+  end
+
+  describe Yast::WidgetDemo::Pages::ItemSelector do
     include_examples "page smoke test"
   end
 

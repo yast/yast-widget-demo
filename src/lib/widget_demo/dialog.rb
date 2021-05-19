@@ -21,6 +21,7 @@ require "widget_demo/page_navigator"
 require "widget_demo/pages/overview"
 require "widget_demo/pages/selection_widgets"
 require "widget_demo/pages/tables"
+require "widget_demo/pages/item_selector"
 require "widget_demo/pages/simple_widgets"
 
 Yast.import "UI"
@@ -44,6 +45,7 @@ module Yast
         nav.add_page(Pages::Overview.new)
         nav.add_page(Pages::SelectionWidgets.new)
         nav.add_page(Pages::Tables.new)
+        nav.add_page(Pages::ItemSelector.new)
         nav.add_page(Pages::SimpleWidgets.new)
         set_wizard_steps
         show_current_page
