@@ -115,7 +115,6 @@ module Yast
 
         def replace_item_selector
           @single_selection = UI.QueryWidget(Id(:single_selection), :Value)
-          log.info("Replacing ItemSelector; single selection: #{@single_selection}")
           UI.ReplaceWidget(Id(:rp_item_selector), item_selector)
         end
 

@@ -36,16 +36,20 @@ module Yast
           VBox(
             VSpacing(0.4),
             MenuBar(main_menus),
-            HVCenter(
-              HVSquash(
-                MinSize(
-                  100, 25,
-                  HBox(
-                    HWeight(1, selbox),
-                    HSpacing(1),
-                    HWeight(1, multi_selbox),
-                    HSpacing(1),
-                    HWeight(1, tree)
+            VSpacing(1),
+            VWeight(
+              1, # lower layout priority to make sure the MenuBar doesn't disappear
+              HVCenter(
+                HVSquash(
+                  MinSize(
+                    100, 25,
+                    HBox(
+                      HWeight(1, selbox),
+                      HSpacing(1),
+                      HWeight(1, multi_selbox),
+                      HSpacing(1),
+                      HWeight(1, tree)
+                    )
                   )
                 )
               )
