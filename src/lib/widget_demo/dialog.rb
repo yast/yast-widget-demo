@@ -35,8 +35,12 @@ module Yast
       include Yast::UIShortcuts
       include Yast::Logger
 
+      attr_accessor :enable_dialog_title, :enable_wizard_steps
+
       def initialize
         @page_navigator = PageNavigator.new
+        @enable_dialog_title = true
+        @enable_wizard_steps = true
       end
 
       # Displays the dialog
@@ -71,6 +75,10 @@ module Yast
         @page_navigator
       end
 
+      def wizard_steps?
+        @enable_wizard_steps
+      end
+
       def create_dialog
         Wizard.OpenNextBackStepsDialog
       end
@@ -81,9 +89,11 @@ module Yast
 
       def show_current_page
         page = current_page
+        dialog_title = @enable_dialog_title ? page.wizard_heading : ""
+
         # Always enable the "Next" button: If there is no more next page,
         # it will have the label "Finish", but we still need it to work.
-        Wizard.SetContents(page.wizard_heading, page.content, help_text, nav.back?, true)
+        Wizard.SetContents(dialog_title, page.content, help_text, nav.back?, true)
         page.widgets_created
         mark_wizard_step(page.id)
         update_wizard_buttons
@@ -109,16 +119,22 @@ module Yast
       end
 
       def add_wizard_step_heading(text)
+        return unless wizard_steps?
+
         # This is safe to use even with NCurses: It does nothing
         UI.WizardCommand(Yast.term(:AddStepHeading, text))
       end
 
       def add_wizard_step(text, step_id = nil)
+        return unless wizard_steps?
+
         # Steps without an ID are ignored
         UI.WizardCommand(Yast.term(:AddStep, text, step_id))
       end
 
       def mark_wizard_step(step_id)
+        return unless wizard_steps?
+
         UI.WizardCommand(Yast.term(:UpdateSteps))
         UI.WizardCommand(Yast.term(:SetCurrentStep, step_id))
       end
