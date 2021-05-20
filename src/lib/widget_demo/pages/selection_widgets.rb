@@ -130,14 +130,12 @@ module Yast
           UI.ChangeWidget(
             :menu_bar,
             :EnabledItems,
-            {
-              "MenuItem 12" => false,
-              "MenuItem 17" => false,
-              "MenuItem 142" => false,
-              "MenuItem 22" => false,
-              "MenuItem 33" => false,
-              "MenuItem 44" => false
-            }
+            "MenuItem 12"  => false,
+            "MenuItem 17"  => false,
+            "MenuItem 142" => false,
+            "MenuItem 22"  => false,
+            "MenuItem 33"  => false,
+            "MenuItem 44"  => false
           )
         end
       end
