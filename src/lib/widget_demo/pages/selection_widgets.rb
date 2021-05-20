@@ -41,7 +41,7 @@ module Yast
         def content
           VBox(
             VSpacing(0.4),
-            MenuBar(main_menus),
+            MenuBar(Id(:menu_bar), main_menus),
             VSpacing(1),
             HCenter(
               HSquash(
@@ -59,6 +59,10 @@ module Yast
             ),
             VSpacing(0.4)
           )
+        end
+
+        def widgets_created
+          disable_some_menu_items
         end
 
         private
@@ -105,11 +109,36 @@ module Yast
 
         def main_menus
           [
-            Menu("Men&uBar", items(5, "MenuItem 10")),
-            Menu("Menu &2", items(7, "MenuItem 20")),
-            Menu("Menu &3", items(4, "MenuItem 30")),
-            Menu("Menu &4", items(7, "MenuItem 40"))
+            Menu("Men&uBar", menu_1_items),
+            Menu("Menu &2", items(7, "MenuItem 2&0")),
+            Menu("Menu &3", items(4, "MenuItem 3&0")),
+            Menu("Menu &4", items(7, "MenuItem 4&0"))
           ]
+        end
+
+        # Make the first menu a bit special with a submenu and a separator
+        def menu_1_items
+          menu_items = items(3, "MenuItem 1&0")
+          menu_items << Menu("S&ubmenu", items(4, "MenuItem 140"))
+          menu_items << Item("MenuItem 1&5")
+          menu_items << Item("---")
+          menu_items << Item("MenuItem 1&6")
+          menu_items << Item("MenuItem 1&7")
+        end
+
+        def disable_some_menu_items
+          UI.ChangeWidget(
+            :menu_bar,
+            :EnabledItems,
+            {
+              "MenuItem 12" => false,
+              "MenuItem 17" => false,
+              "MenuItem 142" => false,
+              "MenuItem 22" => false,
+              "MenuItem 33" => false,
+              "MenuItem 44" => false
+            }
+          )
         end
       end
     end
