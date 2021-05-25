@@ -35,13 +35,10 @@ module Yast
         def content
           HVSquash(
             MinSize(
-              50, 28,
+              50, 30,
               VBox(
                 HBox(
-                  VBox(
-                    input_widgets,
-                    VStretch()
-                  ),
+                  Top(input_widgets),
                   HSpacing(3),
                   VBox(
                     labels,
@@ -62,36 +59,6 @@ module Yast
 
         private
 
-        def labels
-          VBox(
-            Left(Label("Label")),
-            Left(Label(Opt(:outputField), "OutputField"))
-          )
-        end
-
-        def check_boxes
-          VBox(
-            Left(CheckBox("Checkbo&x 1", false)),
-            Left(CheckBox("Chec&kbox 2", true))
-          )
-        end
-
-        def radio_box
-          Frame(
-            "Frame",
-            MarginBox(
-              1, 0.2,
-              RadioButtonGroup(
-                VBox(
-                  Left(RadioButton("RadioButton &1", true)),
-                  Left(RadioButton("RadioButton &2")),
-                  Left(RadioButton("RadioButton &3"))
-                )
-              )
-            )
-          )
-        end
-
         def input_widgets
           CheckBoxFrame(
             "CheckBox&Frame", true,
@@ -108,6 +75,37 @@ module Yast
                   )
                 ),
                 Left(MultiLineEdit("M&ultiLineEdit", lorem_ipsum))
+              )
+            )
+          )
+        end
+
+        def labels
+          VBox(
+            Left(Label("Label")),
+            Left(Label(Opt(:outputField), "OutputField"))
+          )
+        end
+
+        def check_boxes
+          VBox(
+            Left(CheckBox("Checkbo&x 1", false)),
+            Left(CheckBox("Chec&kbox 2", true)),
+            Left(CheckBox(Opt(:disabled), "Checkbox 3", false))
+          )
+        end
+
+        def radio_box
+          Frame(
+            "Frame",
+            MarginBox(
+              1, 0.2,
+              RadioButtonGroup(
+                VBox(
+                  Left(RadioButton("RadioButton &1", true)),
+                  Left(RadioButton("RadioButton &2")),
+                  Left(RadioButton(Opt(:disabled), "RadioButton &3"))
+                )
               )
             )
           )
@@ -141,7 +139,7 @@ module Yast
         def buttons
           HBox(
             PushButton("&PushButton 1"),
-            PushButton("P&ushButton 2"),
+            PushButton(Opt(:disabled), "P&ushButton 2"),
             menu_button
           )
         end

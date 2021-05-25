@@ -66,7 +66,7 @@ module Yast
         def input_fields
           VBox(
             Left(InputField("InputField 1")),
-            Left(InputField("InputField 2")),
+            Left(InputField(Opt(:disabled), "InputField 2")),
             Left(InputField(Opt(:hstretch), "InputField(Opt(:hstretch)")),
             VSquash(
               HBox(
