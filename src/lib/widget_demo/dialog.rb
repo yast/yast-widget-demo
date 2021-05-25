@@ -30,12 +30,33 @@ Yast.import "Label"
 
 module Yast
   module WidgetDemo
-    # Dialog to showcase UI widgets
+    # Dialog to showcase UI widgets in a wizard sequence.
+    #
+    # In the Qt UI, this uses one of the .qss widget style sheets from the YaST
+    # theme directory /usr/share/YaST2/theme/current/wizard; by default, it
+    # uses style.qss.
+    #
+    # Set the Y2STYLE environment variable to select a different style sheet:
+    #
+    #   export Y2STYLE=installation.qss
+    #
+    # Start the style sheet editor with Ctrl-Shift-Alt-S.
+    #
     class Dialog
       include Yast::UIShortcuts
       include Yast::Logger
 
-      attr_accessor :enable_dialog_title, :enable_wizard_steps
+      # Whether to show die dialog title in the top left corner
+      # of the wizard content area (default: true)
+      #
+      # @return [Boolean]
+      attr_accessor :enable_dialog_title
+
+      # Whether to show wizard steps in the left side panel
+      # (default: true)
+      #
+      # @return [Boolean]
+      attr_accessor :enable_wizard_steps
 
       def initialize
         @page_navigator = PageNavigator.new
@@ -43,7 +64,8 @@ module Yast
         @enable_wizard_steps = true
       end
 
-      # Displays the dialog
+      # Display the dialog and handle events until the user clicks "Finish" in
+      # the last wizard step or "Abort" in any of them
       def run
         create_dialog
         nav.add_page(Pages::Overview.new)

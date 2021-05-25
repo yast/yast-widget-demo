@@ -18,12 +18,20 @@
 
 require "widget_demo/dialog"
 
-# Set the Y2STYLE environment variable to one of the .qss files in
-# /usr/share/YaST2/theme/current/wizard, e.g.
+# YaST client to showcase UI widgets in a wizard sequence.
 #
-# export Y2STYLE=installation.qss
+# In the Qt UI, this uses one of the .qss widget style sheets from the YaST
+# theme directory /usr/share/YaST2/theme/current/wizard; by default, it
+# uses style.qss.
+#
+# Set the Y2STYLE environment variable to select a different style sheet:
+#
+#   export Y2STYLE=installation.qss
+#
+# Start the style sheet editor with Ctrl-Shift-Alt-S.
 #
 demo = Yast::WidgetDemo::Dialog.new
+### Uncomment to override the default settings:
 # demo.enable_dialog_title = false
 # demo.enable_wizard_steps = false
 demo.run
