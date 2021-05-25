@@ -76,4 +76,6 @@ https://github.com/yast/yast-widget-demo/issues/2
 
 - [YaST UI reference documentation](https://doc.opensuse.org/projects/YaST/openSUSE11.3/tdg/Book-UIReference.html)
 
+- [YaST UI examples](https://github.com/yast/yast-ycp-ui-bindings/tree/master/examples)
+
 - [YaST documentation](https://yastgithubio.readthedocs.io/en/latest/) at readthedocs.io
