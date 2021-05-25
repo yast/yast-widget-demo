@@ -26,15 +26,17 @@ editing Qt widget style sheets.
 - Graphical (Qt) version:
 
       yast2 widget_demo
+      
   or
+  
       yast2 widget_demo_no_wizard_steps
 
 - Text-based (NCurses) version:
 
       yast widget_demo
-  or
-      yast widget_demo_no_wizard_steps
 
+
+## Permissions
 
 No root privileges are required for this YaST module.
 
