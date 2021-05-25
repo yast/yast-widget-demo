@@ -47,9 +47,18 @@ The Qt UI uses one of the `.qss` widget style sheets in
 Set the Y2STYLE environment variable to use a different style sheet:
 
     Y2STYLE=installation.qss yast2 widget_demo
-    
+
 Once the demo is running, you can use the style sheet editor with
 `Ctrl-Shift-Alt-S`.
+
+
+## Screenshot
+
+![widget-demo-tw-01](https://user-images.githubusercontent.com/11538225/119511524-cbea8d80-bd72-11eb-9c92-81d63eff0085.png)
+
+
+More screenshots at
+https://github.com/yast/yast-widget-demo/issues/2
 
 
 ## Reference
