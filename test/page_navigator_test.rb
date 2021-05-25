@@ -20,7 +20,7 @@
 
 require_relative "spec_helper"
 require "widget_demo/page_navigator"
-require "widget_demo/pages/simple_widgets"
+require "widget_demo/pages/overview"
 
 describe Yast::WidgetDemo::PageNavigator do
   context "empty" do
@@ -59,9 +59,9 @@ describe Yast::WidgetDemo::PageNavigator do
   context "with 3 pages" do
     subject do
       nav = described_class.new
-      nav.add_page(Yast::WidgetDemo::Pages::SimpleWidgets.new)
-      nav.add_page(Yast::WidgetDemo::Pages::SimpleWidgets.new)
-      nav.add_page(Yast::WidgetDemo::Pages::SimpleWidgets.new)
+      nav.add_page(Yast::WidgetDemo::Pages::Overview.new)
+      nav.add_page(Yast::WidgetDemo::Pages::Overview.new)
+      nav.add_page(Yast::WidgetDemo::Pages::Overview.new)
       nav
     end
 
