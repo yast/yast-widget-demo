@@ -18,4 +18,12 @@
 
 require "widget_demo/dialog"
 
-Yast::WidgetDemo::Dialog.new.run
+# Set the Y2STYLE environment variable to one of the .qss files in
+# /usr/share/YaST2/theme/current/wizard, e.g.
+#
+# export Y2STYLE=installation.qss
+#
+demo = Yast::WidgetDemo::Dialog.new
+# demo.enable_dialog_title = false
+# demo.enable_wizard_steps = false
+demo.run
