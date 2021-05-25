@@ -26,13 +26,30 @@ editing Qt widget style sheets.
 - Graphical (Qt) version:
 
       yast2 widget_demo
+  or
+      yast2 widget_demo_no_wizard_steps
 
 - Text-based (NCurses) version:
 
       yast widget_demo
+  or
+      yast widget_demo_no_wizard_steps
 
 
-No root privileges are required in either case.
+No root privileges are required for this YaST module.
+
+
+## Using a Different Widget Style Sheet
+
+The Qt UI uses one of the `.qss` widget style sheets in
+`/usr/share/YaST2/theme/current/wizard`. The default is `style.qss`.
+
+Set the Y2STYLE environment variable to use a different style sheet:
+
+    Y2STYLE=installation.qss yast2 widget_demo
+    
+Once the demo is running, you can use the style sheet editor with
+`Ctrl-Shift-Alt-S`.
 
 
 ## Reference
