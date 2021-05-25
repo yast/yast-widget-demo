@@ -33,15 +33,16 @@ module Yast
         # The content of this wizard page.
         # Make sure this still fits into an NCurses 80x24 screen!
         def content
-          HVSquash(
-            MinSize(
-              50, 28,
+          HSquash(
+            Opt(:vstretch),
+            MinWidth(
+              50,
               VBox(
+                VStretch(),
                 labels,
-                VSpacing(1),
+                VStretch(),
                 input_fields,
-                VSpacing(0.4), # maintain some minimum spacing
-                Bottom(buttons)
+                VStretch()
               )
             )
           )
@@ -55,6 +56,7 @@ module Yast
             Left(Label("Label")),
             Left(Label(Opt(:boldFont), "Label(Opt(:boldFont)")),
             VSpacing(0.3),
+            VSpacing(0.3), # 2 * 0.3 because < 0.5 is ignored in NCurses
             Left(Label(Opt(:outputField), "OutputField")),
             VSpacing(0.3),
             Left(Label(Opt(:outputField, :hstretch), "OutputField(Opt(:hstretch))"))
@@ -74,27 +76,8 @@ module Yast
                 HStretch()
               )
             ),
-            Left(Password("Password"))
-          )
-        end
-
-        def buttons
-          HBox(
-            PushButton("PushButton 1"),
-            PushButton("PushButton 2"),
-            menu_button
-          )
-        end
-
-        def menu_button
-          MenuButton(
-            "&MenuButton",
-            [
-              Item("MenuItem &1"),
-              Item("MenuItem &2"),
-              Menu("&Submenu", items(3, "MenuItem 3&0")),
-              Item("MenuItem &4")
-            ]
+            Left(Password("Password")),
+            Left(HSquash(IntField("IntField", 0, 999, 42)))
           )
         end
       end

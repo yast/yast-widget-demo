@@ -140,7 +140,8 @@ module Yast
 
         def buttons
           HBox(
-            PushButton("&PushButton"),
+            PushButton("&PushButton 1"),
+            PushButton("P&ushButton 2"),
             menu_button
           )
         end
