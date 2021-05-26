@@ -59,9 +59,8 @@ rake test:unit
 
 %files
 %defattr(-,root,root)
-%{yast_dir}/clients/*.rb
-%{yast_dir}/lib/widget-demo
-
+%{yast_clientdir}
+%{yast_libdir}
 %license COPYING
 
 
