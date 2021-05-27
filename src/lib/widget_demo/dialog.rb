@@ -23,6 +23,7 @@ require "widget_demo/pages/selection_widgets"
 require "widget_demo/pages/tables"
 require "widget_demo/pages/item_selector"
 require "widget_demo/pages/simple_widgets"
+require "widget_demo/pages/check_boxes"
 
 Yast.import "UI"
 Yast.import "Wizard"
@@ -73,6 +74,7 @@ module Yast
         nav.add_page(Pages::Tables.new)
         nav.add_page(Pages::ItemSelector.new)
         nav.add_page(Pages::SimpleWidgets.new)
+        nav.add_page(Pages::CheckBoxes.new)
         set_wizard_steps
         show_current_page
 
@@ -130,10 +132,6 @@ module Yast
         delete_wizard_steps
         add_wizard_step_heading("Widget Demo")
         nav.pages.each { |page| add_wizard_step(page.name, page.id) }
-        # FIXME: TO DO
-        ### add_wizard_step_heading("Package Management")
-        ### add_wifzard_step("PatternSelector", "pattern-sel")
-        ### add_wizard_step("PackageSelector", "pkg-sel")
       end
 
       def delete_wizard_steps
