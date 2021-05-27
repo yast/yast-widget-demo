@@ -25,12 +25,6 @@ jobs:
       env:
         COVERAGE: 1
 
-    ### # send the coverage report to coveralls.io
-    ### - name: Coveralls Report
-    ###   uses: coverallsapp/github-action@master
-    ###   with:
-    ###     github-token: ${{ secrets.GITHUB_TOKEN }}
-
   Rubocop:
     runs-on: ubuntu-latest
     container: registry.opensuse.org/yast/head/containers/yast-ruby:latest

@@ -17,11 +17,6 @@ Metrics/BlockLength:
   Exclude:
     - test/**/*
 
-# some storage API have size method, but without empty? method
-# for details see https://github.com/yast/yast-storage-ng/pull/83
-Style/ZeroLengthPredicate:
-  Enabled: false
-
 # the ".freeze" attribute for the constants is not nice
 Style/MutableConstant:
   Enabled: false
@@ -33,13 +28,3 @@ Style/FrozenStringLiteralComment:
 # workaround https://github.com/rubocop-hq/rubocop/issues/6861
 Layout/AccessModifierIndentation:
   EnforcedStyle: indent
-
-Naming/UncommunicativeMethodParamName:
-  AllowedNames:
-    - vg
-    - md
-    - lv
-    - id
-    - up
-    - to
-    - as
