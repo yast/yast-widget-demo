@@ -24,6 +24,7 @@ require "widget_demo/pages/selection_widgets"
 require "widget_demo/pages/tables"
 require "widget_demo/pages/item_selector"
 require "widget_demo/pages/simple_widgets"
+require "widget_demo/pages/check_boxes"
 
 describe Yast::WidgetDemo::Pages do
 
@@ -60,6 +61,10 @@ describe Yast::WidgetDemo::Pages do
   end
 
   describe Yast::WidgetDemo::Pages::SimpleWidgets do
+    include_examples "page smoke test"
+  end
+
+  describe Yast::WidgetDemo::Pages::CheckBoxes do
     include_examples "page smoke test"
   end
 end

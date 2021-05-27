@@ -26,7 +26,6 @@ Source0:        %{name}-%{version}.tar.bz2
 Requires:       yast2
 Requires:       yast2-ruby-bindings
 
-BuildRequires:  update-desktop-files
 BuildRequires:  yast2-ruby-bindings
 BuildRequires:  yast2-devtools
 BuildRequires:  yast2
@@ -53,14 +52,15 @@ rake test:unit
 
 
 %install
-%yast_install
-# %suse_update_desktop_file org.opensuse.yast.WidgetDemo
+# No .desktop file here, so we can't use %yast_install
+rake install DESTDIR="%{buildroot}"
 
 
 %files
 %defattr(-,root,root)
 %{yast_clientdir}
 %{yast_libdir}
+%{yast_docdir}
 %license COPYING
 
 
