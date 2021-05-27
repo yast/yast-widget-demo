@@ -60,6 +60,7 @@ rake install DESTDIR="%{buildroot}"
 %defattr(-,root,root)
 %{yast_clientdir}
 %{yast_libdir}
+%{yast_docdir}
 %license COPYING
 
 
