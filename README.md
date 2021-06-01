@@ -35,6 +35,17 @@ editing Qt widget style sheets.
 
       yast widget_demo
 
+## Testing in Installation
+
+This demo application is also included in the openSUSE Tumbleweed installer
+and will be included in the openSUSE Leap 15.4 and SUSE Linux Enterprise 15 SP4
+products.
+
+1. Press the `Ctrl+Shift+Alt+C` key in graphical installation or
+   `Ctrl+D Shift+C` in text mode installation anytime during the installation
+2. Press the `Expert Console` button
+3. In the displayed terminal run the `widget_demo` command to start the application
+
 
 ## Permissions
 
