@@ -16,7 +16,7 @@
 #
 
 Name:           yast2-widget-demo
-Version:        0.9.0
+Version:        0.9.1
 Release:        0
 BuildArch:      noarch
 
