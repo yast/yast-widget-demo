@@ -46,6 +46,10 @@ products.
 2. Press the `Expert Console` button
 3. In the displayed terminal run the `widget_demo` command to start the application
 
+## Running in a Docker Container
+
+You can run the widget demo also in a Docker container, see more details in
+[docker/README.md](docker/README.md).
 
 ## Permissions
 
