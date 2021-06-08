@@ -37,6 +37,9 @@ jobs:
     - name: Rubocop
       run: rake check:rubocop
 
+    - name: Shellcheck
+      run: shellcheck docker/run.sh
+
   Package:
     runs-on: ubuntu-latest
     container: registry.opensuse.org/yast/head/containers/yast-ruby:latest
