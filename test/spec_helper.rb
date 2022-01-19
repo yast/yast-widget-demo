@@ -24,3 +24,12 @@ TEST_PATH = File.expand_path(__dir__)
 ENV["Y2DIR"] = SRC_PATH
 
 require "yast"
+
+# configure RSpec
+RSpec.configure do |config|
+  config.mock_with :rspec do |c|
+    # verify that the mocked methods actually exist
+    # https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles/partial-doubles
+    c.verify_partial_doubles = true
+  end
+end
